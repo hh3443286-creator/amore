@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صيدلية الدكتور عمرو</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #07111f;
+  --card: #101f32;
+  --blue: #08b9ee;
+  --blue2: #087cff;
+  --white: #ffffff;
+  --muted: #a9b9cc;
+}
+
+body {
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  background: #0c192a;
+  border-bottom: 1px solid #1c344c;
+  padding: 16px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  color: var(--blue);
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.nav a {
+  color: #dce9f5;
+  margin: 0 8px;
+}
+
+.nav a:hover {
+  color: var(--blue);
+}
+
+.hero {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-text h1 {
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.hero-text h1 span {
+  color: var(--blue);
+}
+
+.hero-text p {
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 1px solid #24425d;
+  background: var(--card);
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  opacity: .88;
+}
+
+section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 35px 25px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.category {
+  background: var(--card);
+  border: 1px solid #203b55;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.category:hover {
+  transform: translateY(-5px);
+  border-color: var(--blue);
+}
+
+.category img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  background: #182b40;
+}
+
+.category-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.category h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.category p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 13px;
+}
+
+.category .btn {
+  width: 100%;
+}
+
+.contact-card {
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 28px;
+  text-align: center;
+  background: linear-gradient(135deg, #102a43, #101c30);
+  border: 1px solid #1d4969;
+  border-radius: 20px;
+}
+
+.contact-card h3 {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.phone {
+  color: var(--blue);
+  font-size: 27px;
+  font-weight: bold;
+  margin: 10px 0 20px;
+  direction: ltr;
+  display: inline-block;
+}
+
+.cart {
+  background: var(--card);
+  border: 1px solid #203b55;
+  padding: 22px;
+  border-radius: 18px;
+  margin-top: 20px;
+}
+
+.cart h3 {
+  margin-bottom: 12px;
+}
+
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #263b50;
+  padding: 10px 0;
+}
+
+.cart-empty {
+  color: var(--muted);
+}
+
+.cart-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.secondary-btn {
+  background: #233950;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  color: var(--muted);
+  border-top: 1px solid #1c344c;
+  margin-top: 35px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, .8);
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  background: #102035;
+  border: 1px solid #28516e;
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  border: none;
+  color: white;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-box img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 13px;
+  margin: 15px 0;
+  background: #182b40;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin: 18px 0;
+}
+
+.quantity button {
+  width: 45px;
+  height: 45px;
+  font-size: 25px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  cursor: pointer;
+}
+
+.quantity span {
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 30px;
+}
+
+@media (max-width: 850px) {
+  .categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 13px;
+  }
+
+  .nav {
+    justify-content: center;
+  }
+
+  .nav-links {
+    text-align: center;
+  }
+
+  .nav a {
+    display: inline-block;
+    margin: 4px 6px;
+    font-size: 13px;
+  }
+
+  section {
+    padding: 25px 14px;
+  }
+
+  .hero {
+    padding: 15px;
+  }
+
+  .categories {
+    gap: 12px;
+  }
+
+  .category img {
+    height: 145px;
+  }
+
+  .category-content {
+    padding: 11px;
+  }
+
+  .category h3 {
+    font-size: 16px;
+  }
+
+  .category p {
+    font-size: 12px;
+  }
+
+  .category .btn {
+    padding: 10px 5px;
+    font-size: 13px;
+  }
+
+  .phone {
+    font-size: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#home" class="logo">💊 صيدلية الدكتور عمرو</a>
+
+    <div class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#categories">الأقسام</a>
+      <a href="#cart">طلباتي</a>
+      <a href="#contact">تواصل معنا</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="home">
+    <div class="hero-text">
+      <h1>صحتك تهمنا في <span>صيدلية الدكتور عمرو</span></h1>
+      <p>
+        تصفح أقسام الصيدلية واختار احتياجاتك وحدد الكمية
+        وابعت طلبك بسهولة عن طريق واتساب.
+      </p>
+      <a href="#categories" class="btn">تصفح الأقسام ←</a>
+    </div>
+
+    <img class="hero-img" src="1.jpg"
+         alt="صورة صيدلية"
+         onerror="this.style.display='none'">
+  </div>
+
+  <section id="categories">
+    <h2 class="section-title">أقسام الصيدلية</h2>
+    <p class="section-subtitle">اضغط على القسم واختار الكمية المطلوبة</p>
+
+    <div class="categories">
+
+      <article class="category">
+        <img src="2.jpg" alt="الأدوية"
+             onerror="this.style.background='#193149'">
+        <div class="category-content">
+          <h3>الأدوية</h3>
+          <p>اضغط لاختيار الكمية المطلوبة</p>
+          <button class="btn" onclick="openProduct('الأدوية','2.jpg')">
+            عرض القسم
+          </button>
+        </div>
+      </article>
+
+      <article class="category">
+        <img src="3.jpg" alt="العناية بالبشرة"
+             onerror="this.style.background='#193149'">
+        <div class="category-content">
+          <h3>العناية بالبشرة</h3>
+          <p>منتجات العناية بالبشرة</p>
+          <button class="btn" onclick="openProduct('العناية بالبشرة','3.jpg')">
+            عرض القسم
+          </button>
+        </div>
+      </article>
+
+      <article class="category">
+        <img src="4.jpg" alt="الأدوية الشراب"
+             onerror="this.style.background='#193149'">
+        <div class="category-content">
+          <h3>الأدوية الشراب</h3>
+          <p>اضغط لاختيار الكمية المطلوبة</p>
+          <button class="btn" onclick="openProduct('الأدوية الشراب','4.jpg')">
+            عرض القسم
+          </button>
+        </div>
+      </article>
+
+      <article class="category">
+        <img src="5.jpg" alt="المكياج"
+             onerror="this.style.background='#193149'">
+        <div class="category-content">
+          <h3>المكياج</h3>
+          <p>منتجات المكياج والتجميل</p>
+          <button class="btn" onclick="openProduct('المكياج','5.jpg')">
+            عرض القسم
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="cart">
+    <h2 class="section-title">🛒 طلباتي</h2>
+    <p class="section-subtitle">راجع الأقسام والكميات اللي اخترتها</p>
+
+    <div class="cart">
+      <h3>الأقسام المختارة</h3>
+      <div id="cartItems">
+        <p class="cart-empty">لسه ما اخترتش أي قسم</p>
+      </div>
+
+      <div class="cart-actions">
+        <button class="btn" onclick="sendOrder()">
+          إرسال الطلب على واتساب
+        </button>
+        <button class="btn secondary-btn" onclick="clearCart()">
+          مسح الاختيارات
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">تواصل معنا</h2>
+    <p class="section-subtitle">صيدلية الدكتور عمرو في خدمتك</p>
+
+    <div class="contact-card">
+      <h3>📞 رقم التواصل</h3>
+      <p>تقدر تتواصل مع الصيدلية من خلال الرقم التالي</p>
+
+      <a class="phone" href="tel:01147952787">01147952787</a>
+
+      <br>
+
+      <a class="btn" href="https://wa.me/201147952787" target="_blank"
+         rel="noopener noreferrer">
+        تواصل عبر واتساب
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 صيدلية الدكتور عمرو — جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- نافذة اختيار الكمية -->
+<div class="modal" id="productModal" onclick="closeOutside(event)">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()" aria-label="إغلاق">×</button>
+
+    <h2 id="modalTitle">القسم</h2>
+    <img id="modalImage" src="2.jpg" alt="صورة القسم">
+    <p>حدد الكمية اللي محتاجها</p>
+
+    <div class="quantity">
+      <button onclick="changeQuantity(-1)" aria-label="تقليل الكمية">−</button>
+      <span id="quantityValue">1</span>
+      <button onclick="changeQuantity(1)" aria-label="زيادة الكمية">+</button>
+    </div>
+
+    <button class="btn" style="width:100%" onclick="addToCart()">
+      إضافة إلى طلباتي
+    </button>
+  </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "201147952787";
+
+let selectedCategory = "";
+let selectedImage = "";
+let currentQuantity = 1;
+
+const cart = {};
+
+function openProduct(name, image) {
+  selectedCategory = name;
+  selectedImage = image;
+  currentQuantity = cart[name] || 1;
+
+  document.getElementById("modalTitle").textContent = name;
+  document.getElementById("modalImage").src = image;
+  document.getElementById("quantityValue").textContent = currentQuantity;
+  document.getElementById("productModal").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("productModal").classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function closeOutside(event) {
+  if (event.target.id === "productModal") {
+    closeModal();
+  }
+}
+
+function changeQuantity(amount) {
+  currentQuantity = Math.max(1, currentQuantity + amount);
+  document.getElementById("quantityValue").textContent = currentQuantity;
+}
+
+function addToCart() {
+  cart[selectedCategory] = currentQuantity;
+  renderCart();
+  closeModal();
+
+  document.getElementById("cart").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  const items = Object.entries(cart);
+
+  if (items.length === 0) {
+    container.innerHTML = '<p class="cart-empty">لسه ما اخترتش أي قسم</p>';
+    return;
+  }
+
+  container.innerHTML = "";
+
+  items.forEach(([name, quantity]) => {
+    const row = document.createElement("div");
+    row.className = "cart-row";
+
+    const label = document.createElement("span");
+    label.textContent = name + " — الكمية: " + quantity;
+
+    const edit = document.createElement("button");
+    edit.className = "btn secondary-btn";
+    edit.textContent = "تعديل";
+    edit.onclick = () => {
+      const images = {
+        "الأدوية": "2.jpg",
+        "العناية بالبشرة": "3.jpg",
+        "الأدوية الشراب": "4.jpg",
+        "المكياج": "5.jpg"
+      };
+
+      openProduct(name, images[name]);
+    };
+
+    row.appendChild(label);
+    row.appendChild(edit);
+    container.appendChild(row);
+  });
+}
+
+function clearCart() {
+  Object.keys(cart).forEach(key => delete cart[key]);
+  renderCart();
+}
+
+function sendOrder() {
+  const items = Object.entries(cart);
+
+  if (items.length === 0) {
+    alert("اختار قسم واحد على الأقل قبل إرسال الطلب");
+    return;
+  }
+
+  let message = "السلام عليكم، عايز أطلب من صيدلية الدكتور عمرو:\n\n";
+
+  items.forEach(([name, quantity]) => {
+    message += "• " + name + " — الكمية: " + quantity + "\n";
+  });
+
+  message += "\nمن فضلكم أكدوا توافر المنتجات والأسعار.";
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
